@@ -31,7 +31,6 @@ public class View extends JComponent implements PropertyChangeListener {
 			repaint();
 		}
 	}
-
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
 		repaint();
