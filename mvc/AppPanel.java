@@ -39,6 +39,7 @@ public class AppPanel extends JPanel implements PropertyChangeListener, ActionLi
 		frame = new JFrame();
 		Container cp = frame.getContentPane();
 		cp.add(this);
+		frame.getContentPane().validate();
 		frame.setJMenuBar(createMenuBar());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle(factory.getTitle());

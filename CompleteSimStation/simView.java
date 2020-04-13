@@ -5,10 +5,15 @@
  * 
  */
 
-package Drunk;
+package CompleteSimStation;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 
 import CompleteSimStation.Agent;
 import CompleteSimStation.Simulation;
@@ -16,11 +21,12 @@ import CompleteSimStation.Simulation;
 //import MVC.View;
 import mvc.*;
 
-public class simView extends View {
+public class simView extends View implements ActionListener {
 
 	/**
 	 * 
 	 */
+	Timer timer=new Timer(100,this);
 	Simulation sim = new Simulation();
 	private static final long serialVersionUID = 4890019208920195218L;
 	
@@ -30,9 +36,19 @@ public class simView extends View {
 		setSize(Simulation.WORLD_SIZE, Simulation.WORLD_SIZE);
 		sim = (Simulation)model;
 		sim.populate();
+		timer.start();
+
 		
 	}
-	
+	public void actionPerformed(ActionEvent e) {
+	    new Thread() {
+	        public void run() {
+	        	if(e.getSource()==timer){
+	      	      repaint();// this will call at every 1 second	
+	      	    }
+	        }
+	    }.start();
+	}
 	public void paintComponent(Graphics gc) 
 	{
 		

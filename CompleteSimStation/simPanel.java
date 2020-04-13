@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Drunk.simView;
 import mvc.*;
 
 public class simPanel extends AppPanel{

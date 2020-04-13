@@ -117,8 +117,7 @@ public abstract class Agent extends Model implements Runnable
 		{
 			update();
 			
-			try 
-			{
+			try {
 				Thread.sleep(100); // be cooperative
 				synchronized(this) {
 					while(isSuspended()) { wait(); }
@@ -193,6 +192,7 @@ public abstract class Agent extends Model implements Runnable
 			}
 		}
 		changed();
+		
 	}
 	
 	public abstract void update();
