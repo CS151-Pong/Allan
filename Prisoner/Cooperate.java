@@ -6,7 +6,7 @@ public Cooperate(Prisoner p) {
 	prisoner=p;
 }
 public boolean cooperate() {
-	return true;
+	return false;
 	//should be overrided
 }
 }

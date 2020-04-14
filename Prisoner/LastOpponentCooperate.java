@@ -1,7 +1,7 @@
 package Prisoner;
 
-public class lastOpponentCooperate extends Cooperate{
-public lastOpponentCooperate(Prisoner p) {
+public class LastOpponentCooperate extends Cooperate{
+public LastOpponentCooperate(Prisoner p) {
 		super(p);
 	}
 

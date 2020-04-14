@@ -13,7 +13,7 @@ import mvc.Utilities;
 import mvc.*;
 
 
-public abstract class Agent extends Model implements Runnable 
+public abstract class Agent extends Model implements Runnable
 {
 	
 	private static final long serialVersionUID = 8402972125725120175L;
@@ -26,8 +26,7 @@ public abstract class Agent extends Model implements Runnable
 	private AgentState state;
 	private static int WORLD_SIZE = 250;
 	private Random rand;
-	//private boolean suspend = false;
-	
+
 	public Agent(String name) 
 	{
 		this.name = name;
@@ -93,7 +92,7 @@ public abstract class Agent extends Model implements Runnable
 		heading=newHeading;
 	}
 	
-	public void setSimulation(Simulation sim) // set this in Simlation when Sim adds Agents
+	public void setSimulation(Simulation sim) // set this in Simulation when Sim adds Agents
 	{
 		this.sim = sim; // agent.SetSimlation(this); goes within addAgent within Simulation
 	}
@@ -112,12 +111,12 @@ public abstract class Agent extends Model implements Runnable
 
 	@Override
 	public void run() {
-		//thread = Thread.currentThread(); // catch my thread
 		while(!isStopped()) 
 		{
 			update();
 			
-			try {
+			try 
+			{
 				Thread.sleep(100); // be cooperative
 				synchronized(this) {
 					while(isSuspended()) { wait(); }
@@ -132,7 +131,6 @@ public abstract class Agent extends Model implements Runnable
 	
 	public void start()
 	{
-		//thread = new Thread(this);
 		thread.start();
 		state = AgentState.RUNNING;
 		changed();
@@ -163,7 +161,7 @@ public abstract class Agent extends Model implements Runnable
 			{
 				y = y - steps; // move up
 				if (y < 0) { // don't go above the screen
-					y = 0;
+					y = WORLD_SIZE - y;
 				}
 				break;
 			}
@@ -171,7 +169,7 @@ public abstract class Agent extends Model implements Runnable
 			{
 				y = y + steps; // move down
 				if (y > WORLD_SIZE) { // don't go below screen
-					y = WORLD_SIZE;}
+					y = y - WORLD_SIZE;}
 				break;
 			}
 			case EAST:
@@ -179,7 +177,7 @@ public abstract class Agent extends Model implements Runnable
 
 				x = x + steps; // move right
 				if (x > WORLD_SIZE) { // don't go off the right size
-					x = WORLD_SIZE;}
+					x = x - WORLD_SIZE;}
 				break;
 			}
 				
@@ -187,16 +185,15 @@ public abstract class Agent extends Model implements Runnable
 			{
 				x = x - steps; // move left
 				if (x < 0) { // don't go off the left side
-					x = 0;}
+					x = WORLD_SIZE - x;}
 				break;
 			}
 		}
 		changed();
-		
 	}
 	
 	public abstract void update();
-	//to be overrided
+	//to be overridden
 	
 	
 }

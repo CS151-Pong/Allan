@@ -17,17 +17,17 @@ public class PrisonerSimulation extends Simulation{
 		{
 			prisoner = new Prisoner("Prisoner #" + i);
 			this.addAgent(prisoner);
-			if(i>=0&&i<10) {
-				prisoner.setCooperate(new AlwaysCooperate(prisoner));
-			}
-			else if(i>=10&&i<20) {
+			if(i%4==0) {
 				prisoner.setCooperate(new AlwaysCheat(prisoner));
 			}
-			else if(i>=20&&i<30) {
+			else if(i%4==1) {
+				prisoner.setCooperate(new AlwaysCooperate(prisoner));
+			}
+			else if(i%4==2) {
 				prisoner.setCooperate(new RandomlyCooperate(prisoner));
 			}
-			else if(i>=30&&i<40) {
-				prisoner.setCooperate(new lastOpponentCooperate(prisoner));
+			else if(i%4==3) {
+				prisoner.setCooperate(new LastOpponentCooperate(prisoner));
 			}
 		}
 	}
@@ -38,30 +38,30 @@ public class PrisonerSimulation extends Simulation{
 		int fitnessCooperators=0;
 		int fitnessReciproicator=0;
 		int fitnessRandom=0;
-
+		int cheaters=0;
+		int cooperators=0;
+		int reciproicator=0;
+		int random=0;
+		
 		for(Agent a: this.getAgents()) {
 			Prisoner prisoner=(Prisoner)a;
 			Cooperate strat=prisoner.getCooperate();
-			int cheaters=0;
-			int cooperators=0;
-			int reciproicator=0;
-			int random=0;
 			if(strat instanceof AlwaysCooperate) {
 				cooperators++;
 				fitnessCooperators=(fitnessCooperators+prisoner.getFitness())/cooperators;
 				
 			}
-			if(strat instanceof AlwaysCheat) {
+			else if(strat instanceof AlwaysCheat) {
 				cheaters++;
 				fitnessCheaters=(fitnessCheaters+prisoner.getFitness())/cheaters;
 				
 			}
-			if(strat instanceof lastOpponentCooperate) {
+			else if(strat instanceof LastOpponentCooperate) {
 				reciproicator++;
 				fitnessReciproicator=(fitnessReciproicator+prisoner.getFitness())/reciproicator;
 				
 			}
-			if(strat instanceof RandomlyCooperate) {
+			else if(strat instanceof RandomlyCooperate) {
 				random++;
 				fitnessRandom=(fitnessRandom+prisoner.getFitness())/random;
 			}
