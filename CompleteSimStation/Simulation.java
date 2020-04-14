@@ -118,7 +118,7 @@ public class Simulation extends Model{
 		x = Math.sqrt(x);
 		return (int)x;
 	}
-	public synchronized Agent getNeighbor(Agent a) {
+	public synchronized Agent getNeighbor(Agent a, double radius) {
 		int i = Utilities.rng.nextInt(agent.size());
 		boolean found = false;
 		Agent temporary = null;
@@ -127,7 +127,7 @@ public class Simulation extends Model{
 			
 			temporary = agent.get(i);
 			
-			if(distance(temporary.getX(),a.getX(),temporary.getY(), a.getY()) < 10){
+			if(distance(temporary.getX(),a.getX(),temporary.getY(), a.getY()) < radius){
 				found = true;
 				changed();
 			}

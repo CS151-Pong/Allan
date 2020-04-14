@@ -25,7 +25,7 @@ public boolean cooperate() {
 }
 public void update() {
 	sim=this.getSim();
-	prisoner=(Prisoner)sim.getNeighbor(this);
+	prisoner=(Prisoner)sim.getNeighbor(this,20);
 	boolean thisGuy=cooperate();
 	boolean enemy=prisoner.cooperate();
 	//both cooperate
